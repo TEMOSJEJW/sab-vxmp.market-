@@ -6,16 +6,48 @@
 <title>VXMP Market - Steal A Brainrot</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* Add your CSS styles here */
+body { font-family: 'Roboto', sans-serif; background-color: #0d0d0d; color: #fff; margin:0; padding:0;}
+header { background: linear-gradient(90deg,#5865F2,#4a42c4); text-align:center; padding:40px 20px;}
+header img.banner { max-width:90%; height:auto; border-radius:12px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;}
+header h1 { margin:0; font-size:2.2rem;}
+header p { margin:5px 0 0 0; font-size:1rem; color:#e0e0e0;}
+header img.thumbnail { width:80px; border-radius:8px; margin-top:15px;}
+.controls { max-width:1200px; margin:20px auto; display:flex; flex-wrap:wrap; gap:15px; justify-content:center;}
+.controls input, .controls select { padding:10px; border-radius:8px; border:none; font-size:1rem;}
+main { padding:20px; max-width:1200px; margin:auto;}
+.items-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px;}
+.item-card { background: linear-gradient(145deg,#1e1e1e,#222); border-radius:12px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.5); transition: transform 0.3s, box-shadow 0.3s; position:relative;}
+.item-card:hover { transform:scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.7);}
+.item-card img { width:100%; height:200px; object-fit:cover; border-bottom:2px solid #5865F2;}
+.item-content { padding:15px;}
+.item-content h2 { margin:0; font-size:1.3rem; color:#fff;}
+.item-content p { margin:4px 0; font-size:0.9rem; color:#b0b0b0; display:flex; align-items:center;}
+.item-content p .robux { margin-left:5px; width:16px; height:16px;}
+.item-content input.quantity { width:60px; padding:5px; margin-top:5px; border-radius:6px; border:none; text-align:center;}
+.buy-btn { display:block; margin-top:12px; background: linear-gradient(90deg,#5865F2,#4a42c4); color:#fff; text-align:center; padding:10px; border-radius:8px; text-decoration:none; font-weight:bold; cursor:pointer;}
+.buy-btn:hover { background: linear-gradient(90deg,#4752c4,#3640a2); transform: scale(1.05);}
+footer { text-align:center; padding:25px; background-color:#1e1e1e; margin-top:40px;}
+footer a { color:#5865F2; text-decoration:none;}
+.cart { position: fixed; right: 20px; bottom: 20px; background: linear-gradient(145deg,#1e1e1e,#222); border-radius:12px; padding:15px; width:320px; box-shadow:0 5px 15px rgba(0,0,0,0.5); z-index:100;}
+.cart h3 { margin:0 0 10px 0; color:#fff;}
+.cart ul { list-style:none; padding:0; margin:0; max-height:250px; overflow-y:auto;}
+.cart ul li { padding:5px 0; border-bottom:1px solid #333; display:flex; justify-content:space-between; align-items:center;}
+.cart .total { margin-top:10px; font-weight:bold; display:flex; justify-content:space-between;}
+.cart button { width:100%; margin-top:10px; background: linear-gradient(90deg,#5865F2,#4a42c4); color:#fff; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;}
+.cart button:hover { background: linear-gradient(90deg,#4752c4,#3640a2); transform: scale(1.05);}
+.remove-btn { background:#ff4c4c; padding:4px 8px; border:none; border-radius:6px; color:#fff; cursor:pointer; font-size:0.8rem; transition: background 0.2s;}
+.remove-btn:hover { background:#e43c3c;}
+.tooltip { position:absolute; background:#222; color:#fff; padding:10px; border-radius:8px; font-size:0.8rem; display:none; z-index:10; max-width:200px; box-shadow:0 5px 15px rgba(0,0,0,0.5);}
+.item-card:hover .tooltip { display:block; top:10px; left:10px;}
 </style>
 </head>
 <body>
 
 <header>
-    <img class="banner" src="https://example.com/banner.jpg" alt="VXMP Market Banner">
+    <img class="banner" src="https://i.imgur.com/o1pF5FZ.png" alt="VXMP Market Banner">
     <h1>VXMP Market - Steal A Brainrot</h1>
     <p>Acquire your favorite Brainrots with Robux! Join our Discord for giveaways.</p>
-    <img class="thumbnail" src="https://example.com/thumbnail.jpg" alt="Thumbnail">
+    <img class="thumbnail" src="https://i.imgur.com/3rXQeLg.png" alt="Thumbnail">
 </header>
 
 <div class="controls">
@@ -43,19 +75,20 @@
 </footer>
 
 <script>
-// JavaScript code to handle Brainrot data and interactions
+const webhookURL = "https://discord.com/api/webhooks/1428707959793389604/ndIt_8ftJnLw7rHFS3qdl671nspqmlpKQzmFFAjwwBw5c-eEIEoyR3Bz_lbf2pfbrJdI";
+const robuxRate = 10;
 
 const brainrots = [
-    {name:"Tung Tung Tung Sahur", img:"https://example.com/tungtung.jpg", cost:2.9, income:24.5, rarity:"Secret", ritual:"No", sound:""},
-    {name:"Trippa Troppa", img:"https://example.com/trippatroppa.jpg", cost:3.2, income:26.1, rarity:"Rare", ritual:"Yes", sound:"Chirp"},
-    {name:"Lirì Lirà", img:"https://example.com/lirilira.jpg", cost:3.5, income:28.0, rarity:"Epic", ritual:"No", sound:"Moo"},
-    {name:"Crocodina", img:"https://example.com/crocodina.jpg", cost:4.1, income:30.0, rarity:"Secret", ritual:"No", sound:"Hiss"},
-    {name:"Bombardino Crocodilo", img:"https://example.com/bombardino.jpg", cost:5.0, income:35.0, rarity:"Legendary", ritual:"Yes", sound:"Roar"},
-    {name:"Capuccino Assassino", img:"https://example.com/capuccino.jpg", cost:1.8, income:15.0, rarity:"Common", ritual:"No", sound:"Squeak"},
-    {name:"Krokodildo Penesini", img:"https://example.com/krokodildo.jpg", cost:2.5, income:20.0, rarity:"Rare", ritual:"No", sound:""},
-    {name:"Boombardilo Krokodilo", img:"https://example.com/boombardilo.jpg", cost:4.5, income:32.0, rarity:"Epic", ritual:"Yes", sound:"Zap"},
-    {name:"Supercool", img:"https://example.com/supercool.jpg", cost:3.8, income:29.0, rarity:"Epic", ritual:"No", sound:"Vroom"},
-    {name:"Lijgt Op Jou", img:"https://example.com/lijgtopjou.jpg", cost:5.2, income:36.0, rarity:"Legendary", ritual:"Yes", sound:"Boom"}
+    {name:"La Spooky Grande", img:"https://static.wikia.nocookie.net/stealabr/images/5/51/Spooky_Grande.png", cost:2.9, income:24.5, rarity:"Secret", ritual:"No", sound:""},
+    {name:"Chimpanzini Spiderini", img:"https://static.wikia.nocookie.net/stealabr/images/1/1e/Chimpanzini_Spiderini.png", cost:3.2, income:26.1, rarity:"Rare", ritual:"Yes", sound:"Chirp"},
+    {name:"Las Vaquitas Saturnitas", img:"https://static.wikia.nocookie.net/stealabr/images/4/4f/Las_Vaquitas_Saturnitas.png", cost:3.5, income:28.0, rarity:"Epic", ritual:"No", sound:"Moo"},
+    {name:"Mysterious Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/0/0a/Mysterious_Brainrot.png", cost:4.1, income:30.0, rarity:"Secret", ritual:"No", sound:"Hiss"},
+    {name:"Giga Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/2/23/Giga_Brainrot.png", cost:5.0, income:35.0, rarity:"Legendary", ritual:"Yes", sound:"Roar"},
+    {name:"Mini Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/8/80/Mini_Brainrot.png", cost:1.8, income:15.0, rarity:"Common", ritual:"No", sound:"Squeak"},
+    {name:"Invisible Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/9/95/Invisible_Brainrot.png", cost:2.5, income:20.0, rarity:"Rare", ritual:"No", sound:""},
+    {name:"Quantum Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/7/70/Quantum_Brainrot.png", cost:4.5, income:32.0, rarity:"Epic", ritual:"Yes", sound:"Zap"},
+    {name:"Turbo Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/3/3b/Turbo_Brainrot.png", cost:3.8, income:29.0, rarity:"Epic", ritual:"No", sound:"Vroom"},
+    {name:"Ultra Brainrot", img:"https://static.wikia.nocookie.net/stealabr/images/6/63/Ultra_Brainrot.png", cost:5.2, income:36.0, rarity:"Legendary", ritual:"Yes", sound:"Boom"}
 ];
 
 let cart = [];
@@ -67,14 +100,14 @@ const cartTotalEl = document.getElementById("cartTotal");
 function renderItems(items){
     grid.innerHTML='';
     items.forEach(b=>{
-        const robuxPrice = (b.cost * 10).toFixed(1);
+        const robuxPrice = (b.cost*robuxRate).toFixed(1);
         const card = document.createElement('div');
         card.className='item-card';
         card.innerHTML=`
             <img src="${b.img}" alt="${b.name}">
             <div class="tooltip">
                 Cost: $${b.cost}B<br>
-                Robux: ${(b.cost*10).toFixed(1)}<br>
+                Robux: ${robuxPrice}<br>
                 Income: ${b.income}M/s<br>
                 Rarity: ${b.rarity}<br>
                 Ritual: ${b.ritual}<br>
@@ -112,7 +145,7 @@ function renderCart(){
     cartItemsEl.innerHTML='';
     let totalCost=0, totalRobux=0;
     cart.forEach(b=>{
-        const robuxPrice = (b.cost*10*b.qty).toFixed(1);
+        const robuxPrice = (b.cost*robuxRate*b.qty).toFixed(1);
         const costTotal = (b.cost*b.qty).toFixed(1);
         totalCost+=b.cost*b.qty;
         totalRobux+=parseFloat(robuxPrice);
@@ -124,13 +157,13 @@ function renderCart(){
 document.getElementById('checkoutBtn').onclick=function(){
     if(cart.length===0){ alert("Your cart is empty."); return; }
     const itemsList = cart.map(b=>{
-        const robuxPrice = (b.cost*10*b.qty).toFixed(1);
+        const robuxPrice = (b.cost*robuxRate*b.qty).toFixed(1);
         const costTotal = (b.cost*b.qty).toFixed(1);
         return `${b.name} x${b.qty} ($${costTotal}B | ${robuxPrice} R$)`}).join('\n');
-    fetch("https://discord.com/api/webhooks/1428707959793389604/ndIt_8ftJnLw7rHFS3qdl671nspqmlpKQzmFFAjwwBw5c-eEIEoyR3Bz_lbf2pfbrJdI",{
+    fetch(webhookURL,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({content:`Purchase Attempt:\n${itemsList}\nTotal Robux: ${cart.reduce((sum,b)=>sum+(b.cost*10*b.qty),0).toFixed(1)} R$`})
+        body: JSON.stringify({content:`Purchase Attempt:\n${itemsList}\nTotal Robux: ${cart.reduce((sum,b)=>sum+(b.cost*robuxRate*b.qty),0).toFixed(1)} R$`})
     }).then(()=>{
         alert("Purchase info sent! Redirecting to Discord...");
         window.open("https://discord.gg/z4ZqcShAMD",'_blank');
@@ -156,7 +189,7 @@ document.getElementById('sortSelect').addEventListener('change',e=>{
     const val=e.target.value;
     if(val==='name') sorted.sort((a,b)=>a.name.localeCompare(b.name));
     if(val==='cost') sorted.sort((a,b)=>a.cost-b.cost);
-    if(val==='robux') sorted.sort((a,b)=>a.cost*10 - b.cost*10);
+    if(val==='robux') sorted.sort((a,b)=>a.cost*robuxRate - b.cost*robuxRate);
     renderItems(sorted);
 });
 </script>
