@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steal A Brainrot Market</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #5865F2;
+      text-align: center;
+      padding: 20px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin: 5px 0;
+      font-size: 1rem;
+      color: #e0e0e0;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .item-card {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .item-card:hover {
+      transform: scale(1.03);
+    }
+    .item-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .item-content {
+      padding: 15px;
+    }
+    .item-content h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .item-content p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+      color: #b0b0b0;
+    }
+    .item-content .price {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #5865F2;
+    }
+    .buy-btn {
+      display: block;
+      margin-top: 10px;
+      background-color: #5865F2;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+    .buy-btn:hover {
+      background-color: #4752c4;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e1e1e;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Steal A Brainrot Market</h1>
+  <p>Explore and acquire a variety of Brainrots to enhance your gameplay!</p>
+</header>
+
+<main>
+  <div class="items-grid" id="itemsGrid"></div>
+</main>
+
+<footer>
+  <p>&copy; 2025 Steal A Brainrot Community</p>
+</footer>
+
+<script>
+  const brainrots = [
+    {
+      name: "La Spooky Grande",
+      img: "https://static.wikia.nocookie.net/stealabr/images/5/51/Spooky_Grande.png/revision/latest?cb=20251012022949",
+      cost: "$2.9B",
+      gender: "Mixed",
+      ritual: "No",
+      income: "$24.5M/s",
+      rarity: "Secret",
+      sound: "Plays",
+      link: "https://discord.gg/z4ZqcShAMD"
+    },
+    {
+      name: "Chimpanzini Spiderini",
+      img: "https://static.wikia.nocookie.net/stealabr/images/1/1e/Chimpanzini_Spiderini.png/revision/latest?cb=20251012022949",
+      cost: "$3.2B",
+      gender: "Male",
+      ritual: "Yes",
+      income: "$30M/s",
+      rarity: "Secret",
+      sound: "Plays",
+      link: "https://discord.gg/z4ZqcShAMD"
+    },
+    {
+      name: "Las Vaquitas Saturnitas",
+      img: "https://static.wikia.nocookie.net/stealabr/images/4/4f/Las_Vaquitas_Saturnitas.png/revision/latest?cb=20251012022949",
+      cost: "$3.5B",
+      gender: "Female",
+      ritual: "No",
+      income: "$35M/s",
+      rarity: "Secret",
+      sound: "Plays",
+      link: "https://discord.gg/z4ZqcShAMD"
+    },
+    {
+      name: "Agarrini La Palini",
+      img: "https://static.wikia.nocookie.net/stealabr/images/3/3e/Agarrini_La_Palini.png/revision/latest?cb=20251012022949",
+      cost: "$4.0B",
+      gender: "Mixed",
+      ritual: "Yes",
+      income: "$40M/s",
+      rarity: "Secret",
+      sound: "Plays",
+      link: "https://discord.gg/z4ZqcShAMD"
+    },
+    {
+      name: "Chicleteira Bicicleteira",
+      img: "https://static.wikia.nocookie.net/stealabr/images/2/2e/Chicleteira_Bicicleteira.png/revision/latest?cb=20251012022949",
+      cost: "$4.5B",
+      gender: "Female",
+      ritual: "No",
+      income: "$45M/s",
+      rarity: "Secret",
+      sound: "Plays",
+      link: "https://discord.gg/z4ZqcShAMD"
+    }
+  ];
+
+  const grid = document.getElementById("itemsGrid");
+
+  brainrots.forEach(brainrot => {
+    const card = document.createElement("div");
+    card.className = "item-card";
+    card.innerHTML = `
+      <img src="${brainrot.img}" alt="${brainrot.name}">
+      <div class="item-content">
+        <h2>${brainrot.name}</h2>
+        <p><strong>Cost:</strong> ${brainrot.cost}</p>
+        <p><strong>Gender:</strong> ${brainrot.gender}</p>
+        <p><strong>Has Ritual?</strong> ${brainrot.ritual}</p>
+        <p><strong>Income:</strong> ${brainrot.income}</p>
+        <p><strong>Rarity:</strong> ${brainrot.rarity}</p>
+        <p><strong>Sound:</strong> ${brainrot.sound}</p>
+        <a href="${brainrot.link}" class="buy-btn" target="_blank">Buy Now</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
